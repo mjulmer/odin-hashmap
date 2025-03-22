@@ -25,20 +25,17 @@ class HashMap {
     const hash = this.hash(key);
     let bucket = this.buckets[hash];
     if (!bucket) {
-      this.buckets[hash] = new LinkedList(key, value);
-    } else {
-      let node = bucket.head;
-      while (node.next) {
-        if (node.key === key) {
-          node.key = key;
-          node.value = value;
-          return;
-        }
-        node = node.next;
-      }
-      const newNode = new Node(key, value);
-      node.nextNode = newNode;
+      bucket = new LinkedList(key, value);
+      this.buckets[hash] = bucket;
     }
+
+    const index = bucket.find(key);
+    if (index === false) {
+      bucket.append(new Node(key, value));
+    } else {
+      bucket.at(index).value = value;
+    }
+
     this.size += 1;
     if (this.size >= this.capacity) {
       this.resizeMap();
