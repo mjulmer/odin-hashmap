@@ -30,3 +30,15 @@ test("Map.remove removes element from map", () => {
   expect(map.remove("feverish")).not.toBe(false);
   expect(map.has("feverish")).toBe(false);
 });
+
+test("Map.get gets an element in the map", () => {
+  const map = new HashMap();
+  map.set("feverish", "lax");
+  expect(map.get("feverish")).toBe("lax");
+});
+
+test("Map.get returns undefined for an element not in the map", () => {
+  const map = new HashMap();
+  map.set("feverish", "lax");
+  expect(map.get("seven")).toBe(undefined);
+});

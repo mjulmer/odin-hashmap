@@ -42,11 +42,22 @@ class HashMap {
     }
   }
 
-  get(key) {}
+  get(key) {
+    let bucket = this.buckets[this.hash(key)];
+    if (!bucket) {
+      return undefined;
+    }
+
+    const index = bucket.find(key);
+    if (index === false) {
+      return undefined;
+    }
+
+    return bucket.at(index).value;
+  }
 
   has(key) {
-    const hash = this.hash(key);
-    let bucket = this.buckets[hash];
+    let bucket = this.buckets[this.hash(key)];
     if (!bucket) {
       return false;
     }
