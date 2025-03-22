@@ -92,7 +92,15 @@ class HashMap {
 
   clear() {}
 
-  keys() {}
+  keys() {
+    const keyList = [];
+    for (const bucket of this.buckets) {
+      if (bucket) {
+        keyList.push(bucket.keys());
+      }
+    }
+    return keyList.flat();
+  }
 
   values() {}
 

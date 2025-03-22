@@ -184,6 +184,18 @@ class LinkedList {
     return node;
   }
 
+  keys() {
+    const keys = [];
+    let node = this.head;
+
+    while (node) {
+      keys.push(node.key);
+      node = node.nextNode;
+    }
+    console.log(keys);
+    return keys;
+  }
+
   toString() {
     let strBuilder = "";
     let node = this.head;

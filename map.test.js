@@ -42,3 +42,17 @@ test("Map.get returns undefined for an element not in the map", () => {
   map.set("feverish", "lax");
   expect(map.get("seven")).toBe(undefined);
 });
+
+test("Map.keys returns an empty array for an empty map", () => {
+  const map = new HashMap();
+  expect(map.keys()).toHaveLength(0);
+});
+
+test("Map.keys returns correct keys", () => {
+  const map = new HashMap();
+  map.set("feverish", "lax");
+  map.set("alto", "discordant");
+  const keys = map.keys();
+  expect(keys).toContain("feverish");
+  expect(keys).toContain("alto");
+});
