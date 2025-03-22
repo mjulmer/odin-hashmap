@@ -100,3 +100,22 @@ test("Map.entries returns correct values", () => {
   map.clear();
   expect(map.length()).toBe(0);
 });
+
+test("Map rebalances when it hits load capacity", () => {
+  const map = new HashMap();
+  map.set("one", "value");
+  map.set("two", "value");
+  map.set("thr", "value");
+  map.set("fou", "value");
+  map.set("fiv", "value");
+  map.set("six", "value");
+  map.set("sev", "value");
+  map.set("eig", "value");
+  map.set("nin", "value");
+  map.set("ten", "value");
+  map.set("ele", "value");
+  map.set("twe", "value");
+  map.set("thi", "value");
+  map.set("fou", "value");
+  expect(map.capacity).toBe(32);
+});

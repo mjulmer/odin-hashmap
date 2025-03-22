@@ -4,7 +4,7 @@ import { LinkedList, Node } from "./linkedlist.js";
 export { HashMap };
 
 class HashMap {
-  static loadFactor = 0.8;
+  loadFactor = 0.8;
   capacity = 16;
   size = 0;
   buckets = [];
@@ -22,6 +22,10 @@ class HashMap {
   }
 
   set(key, value) {
+    if (typeof key !== "string") {
+      console.log("Keys must be strings.");
+      return;
+    }
     const hash = this.hash(key);
     let bucket = this.buckets[hash];
     if (!bucket) {
@@ -37,7 +41,8 @@ class HashMap {
     }
 
     this.size += 1;
-    if (this.size >= this.capacity) {
+    if (this.size >= this.capacity * this.loadFactor) {
+      console.log("rebalancing");
       this.resizeMap();
     }
   }
@@ -134,5 +139,12 @@ class HashMap {
     return entriesList;
   }
 
-  resizeMap() {}
+  resizeMap() {
+    const entries = this.entries();
+    this.capacity *= 2;
+    this.clear();
+    entries.forEach((key, value) => {
+      this.set(key, value);
+    });
+  }
 }
