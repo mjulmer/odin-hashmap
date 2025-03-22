@@ -102,7 +102,15 @@ class HashMap {
     return keyList.flat();
   }
 
-  values() {}
+  values() {
+    const valuesList = [];
+    for (const bucket of this.buckets) {
+      if (bucket) {
+        valuesList.push(bucket.values());
+      }
+    }
+    return valuesList.flat();
+  }
 
   entries() {}
 
