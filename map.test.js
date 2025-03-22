@@ -29,6 +29,7 @@ test("Map.remove removes element from map", () => {
   expect(map.has("feverish")).toBe(true);
   expect(map.remove("feverish")).not.toBe(false);
   expect(map.has("feverish")).toBe(false);
+  expect(map.length()).toBe(0);
 });
 
 test("Map.get gets an element in the map", () => {
@@ -84,4 +85,18 @@ test("Map.entries returns correct values", () => {
   expect(map.entries()).toHaveLength(2);
   expect(entries).toContainEqual(["feverish", "lax"]);
   expect(entries).toContainEqual(["alto", "discordant"]);
+});
+
+test("Clear works on an empty map", () => {
+  const map = new HashMap();
+  map.clear();
+  expect(map.length()).toBe(0);
+});
+
+test("Map.entries returns correct values", () => {
+  const map = new HashMap();
+  map.set("feverish", "lax");
+  map.set("alto", "discordant");
+  map.clear();
+  expect(map.length()).toBe(0);
 });

@@ -83,6 +83,7 @@ class HashMap {
       return false;
     }
 
+    this.size -= 1;
     return bucket.removeAt(index);
   }
 
@@ -90,7 +91,10 @@ class HashMap {
     return this.size;
   }
 
-  clear() {}
+  clear() {
+    this.buckets = [];
+    this.size = 0;
+  }
 
   keys() {
     const keyList = [];
