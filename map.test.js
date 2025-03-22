@@ -70,3 +70,18 @@ test("Map.values returns correct values", () => {
   expect(values).toContain("lax");
   expect(values).toContain("discordant");
 });
+
+test("Map.entries returns an empty array for an empty map", () => {
+  const map = new HashMap();
+  expect(map.entries()).toHaveLength(0);
+});
+
+test("Map.entries returns correct values", () => {
+  const map = new HashMap();
+  map.set("feverish", "lax");
+  map.set("alto", "discordant");
+  const entries = map.entries();
+  expect(map.entries()).toHaveLength(2);
+  expect(entries).toContainEqual(["feverish", "lax"]);
+  expect(entries).toContainEqual(["alto", "discordant"]);
+});

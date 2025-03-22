@@ -112,7 +112,23 @@ class HashMap {
     return valuesList.flat();
   }
 
-  entries() {}
+  entries() {
+    const entriesList = [];
+    for (const bucket of this.buckets) {
+      if (bucket) {
+        const keys = bucket.keys();
+        const values = bucket.values();
+        if (keys.length !== values.length) {
+          console.error("Different number of keys and values in map.");
+          return;
+        }
+        for (let i = 0; i < keys.length; i++) {
+          entriesList.push([keys[i], values[i]]);
+        }
+      }
+    }
+    return entriesList;
+  }
 
   resizeMap() {}
 }
