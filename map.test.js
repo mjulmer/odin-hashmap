@@ -126,3 +126,20 @@ test("Map rebalances when it hits load capacity", () => {
   map.set("fourteen", "value");
   expect(map.capacity).toBe(32);
 });
+
+test("Map does not rebalance before hitting load capacity", () => {
+  const map = new HashMap();
+  map.set("one", "value");
+  map.set("two", "value");
+  map.set("thr", "value");
+  map.set("fou", "value");
+  map.set("fiv", "value");
+  map.set("six", "value");
+  map.set("sev", "value");
+  map.set("eig", "value");
+  map.set("nin", "value");
+  map.set("ten", "value");
+  map.set("ele", "value");
+  map.set("twe", "value");
+  expect(map.capacity).toBe(16);
+});
