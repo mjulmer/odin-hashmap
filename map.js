@@ -1,6 +1,6 @@
 "use strict";
 
-import { LinkedList, Node } from "./linkedlist.js";
+import { LinkedList } from "./linkedlist.js";
 export { HashMap };
 
 class HashMap {
@@ -23,21 +23,23 @@ class HashMap {
 
   set(key, value) {
     if (typeof key !== "string") {
-      console.log("Keys must be strings.");
-      return;
+      console.log(
+        `Keys must be strings. Got key ${key} with type ${typeof key}`
+      );
     }
     const hash = this.hash(key);
     let bucket = this.buckets[hash];
-    if (!bucket) {
+    if (bucket) {
+      const index = bucket.find(key);
+      if (index === false) {
+        bucket.append(key, value);
+      } else {
+        bucket.at(index).value = value;
+        return;
+      }
+    } else {
       bucket = new LinkedList(key, value);
       this.buckets[hash] = bucket;
-    }
-
-    const index = bucket.find(key);
-    if (index === false) {
-      bucket.append(new Node(key, value));
-    } else {
-      bucket.at(index).value = value;
     }
 
     this.size += 1;
@@ -143,8 +145,8 @@ class HashMap {
     const entries = this.entries();
     this.capacity *= 2;
     this.clear();
-    entries.forEach((key, value) => {
-      this.set(key, value);
+    entries.forEach((entry) => {
+      this.set(entry[0], entry[1]);
     });
   }
 }

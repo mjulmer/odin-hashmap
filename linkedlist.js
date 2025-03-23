@@ -1,6 +1,6 @@
 "use strict";
 
-export { LinkedList, Node };
+export { LinkedList };
 
 class Node {
   key = null;

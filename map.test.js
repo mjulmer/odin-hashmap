@@ -11,6 +11,13 @@ test("Map with one element added has length 1", () => {
   expect(map.length()).toBe(1);
 });
 
+test("Resetting element does not increase length", () => {
+  const map = new HashMap();
+  map.set("feverish", "lax");
+  map.set("feverish", "taut");
+  expect(map.length()).toBe(1);
+});
+
 test("Map.has returns false for missing element", () => {
   const map = new HashMap();
   map.set("feverish", "lax");
@@ -115,7 +122,7 @@ test("Map rebalances when it hits load capacity", () => {
   map.set("ten", "value");
   map.set("ele", "value");
   map.set("twe", "value");
-  map.set("thi", "value");
-  map.set("fou", "value");
+  map.set("thirteen", "value");
+  map.set("fourteen", "value");
   expect(map.capacity).toBe(32);
 });
